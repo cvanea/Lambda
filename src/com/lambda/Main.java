@@ -1,5 +1,6 @@
 package com.lambda;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,9 +12,9 @@ public class Main {
 
         System.out.println("Would you like to input individually or as a block? Answer 'indi' or 'block'");
 
-        String userinput = scanner.next();
+        String userInput = scanner.next();
 
-        switch (userinput) {
+        switch (userInput) {
             case "indi":
 
                 Variable x = new Variable("x");
@@ -43,11 +44,18 @@ public class Main {
             case "block":
                 scanner.useDelimiter("");
 
-                System.out.print("What is your calculation?");
-                
+                System.out.println("What is your calculation?");
+
+                ArrayList<String> calcList = new ArrayList<>();
+
                 while (scanner.hasNext()) {
-                    System.out.print(scanner.next());
+                    String s1 = scanner.next();
+                    if ("|".equals(s1)) {
+                        break;
+                    } else calcList.add(s1);
                 }
+
+                System.out.println(calcList);
 
                 break;
             default:
