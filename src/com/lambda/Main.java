@@ -7,30 +7,52 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Variable x = new Variable("x");
-        Variable y = new Variable("y");
-
         Scanner scanner = new Scanner(System.in);
 
-        try {
-            System.out.println("What is your first number?");
+        System.out.println("Would you like to input individually or as a block? Answer 'indi' or 'block'");
 
-            x.setValue(scanner.nextInt());
+        String userinput = scanner.next();
 
-            System.out.println("What is your second number?");
+        switch (userinput) {
+            case "indi":
 
-            y.setValue(scanner.nextInt());
+                Variable x = new Variable("x");
+                Variable y = new Variable("y");
 
-            System.out.println("What operation would you like?");
+                try {
+                    System.out.println("What is your first number?");
 
-            Operation operation = Operation.getInstance(scanner.next());
+                    x.setValue(scanner.nextInt());
 
-            System.out.println(operation.evaluate(x, y));
+                    System.out.println("What is your second number?");
 
-        } catch (InvalidOperationException e) {
-            System.out.println(e.getMessage());
-        } catch (InputMismatchException e) {
-            System.out.println("Not a number!");
+                    y.setValue(scanner.nextInt());
+
+                    System.out.println("What operation would you like?");
+
+                    Operation operation = Operation.getInstance(scanner.next());
+
+                    System.out.println(operation.evaluate(x, y));
+
+                } catch (InvalidOperationException e) {
+                    System.out.println(e.getMessage());
+                } catch (InputMismatchException e) {
+                    System.out.println("Not a number!");
+                }
+                break;
+            case "block":
+                scanner.useDelimiter("");
+
+                System.out.print("What is your calculation?");
+                
+                while (scanner.hasNext()) {
+                    System.out.print(scanner.next());
+                }
+
+                break;
+            default:
+                System.out.println("Not a valid input.");
+                break;
         }
     }
 }
